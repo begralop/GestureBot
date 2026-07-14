@@ -1,0 +1,41 @@
+{
+  "input_pattern": "data/raw/*_s*.csv",
+  "input_files": [
+    "data/raw/belen_s1.csv"
+  ],
+  "total_rows_read": 1083,
+  "accepted_rows": 1083,
+  "rejected_rows": 0,
+  "number_of_features": 128,
+  "normalization": {
+    "translation": "landmark 0 (wrist) is moved to origin",
+    "scale": "mean 3D distance from wrist to MCP landmarks 5, 9, 13 and 17",
+    "orientation": "preserved",
+    "handedness": "two one-hot features: hand_LEFT and hand_RIGHT"
+  },
+  "class_counts": {
+    "FORWARD": 206,
+    "STOP": 223,
+    "BACKWARD": 200,
+    "GRIPPER": 222,
+    "OTHER": 232
+  },
+  "subject_counts": {
+    "belen": 1083
+  },
+  "session_counts": {
+    "belen:1": 1083
+  },
+  "handedness_counts": {
+    "LEFT": 523,
+    "RIGHT": 560
+  },
+  "accepted_by_file": {
+    "belen_s1.csv": 1083
+  },
+  "rejected_reasons": {},
+  "outputs": {
+    "npz": "data/processed/gesture_dataset.npz",
+    "csv": "data/processed/gesture_dataset.csv"
+  }
+}

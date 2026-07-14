@@ -1,0 +1,26 @@
+# Entornos virtuales
+.venv/
+venv/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Editores
+.vscode/
+.idea/
+
+# Archivos temporales
+*.log
+*.tmp
+
+# Modelo base descargado de MediaPipe
+models/*.task
