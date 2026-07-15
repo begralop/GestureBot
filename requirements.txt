@@ -1,5 +1,8 @@
-mediapipe==0.10.21
 numpy==1.26.4
+ 
+mediapipe==0.10.21; platform_system=="Darwin" and platform_machine=="x86_64"
+mediapipe==0.10.35; platform_system=="Windows"
+ 
 scikit-learn==1.5.2
 joblib==1.4.2
 matplotlib==3.9.2
