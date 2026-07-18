@@ -1,10 +1,19 @@
 {
   "input_pattern": "data/raw/*_s*.csv",
   "input_files": [
-    "data/raw/belen_s1.csv"
+    "data/raw/abde_s1.csv",
+    "data/raw/aitana_s1.csv",
+    "data/raw/andrea_s1.csv",
+    "data/raw/belen_s1.csv",
+    "data/raw/dani_s1.csv",
+    "data/raw/emrah_s1.csv",
+    "data/raw/javi_s1.csv",
+    "data/raw/leire_s1.csv",
+    "data/raw/mabel_s1.csv",
+    "data/raw/maja_s1.csv"
   ],
-  "total_rows_read": 1083,
-  "accepted_rows": 1083,
+  "total_rows_read": 8035,
+  "accepted_rows": 8035,
   "rejected_rows": 0,
   "number_of_features": 128,
   "normalization": {
@@ -14,24 +23,51 @@
     "handedness": "two one-hot features: hand_LEFT and hand_RIGHT"
   },
   "class_counts": {
-    "FORWARD": 206,
-    "STOP": 223,
-    "BACKWARD": 200,
-    "GRIPPER": 222,
-    "OTHER": 232
+    "FORWARD": 1645,
+    "STOP": 1512,
+    "BACKWARD": 1528,
+    "GRIPPER": 1603,
+    "OTHER": 1747
   },
   "subject_counts": {
-    "belen": 1083
+    "abde": 1070,
+    "aitana": 470,
+    "andrea": 633,
+    "belen": 1083,
+    "dani": 820,
+    "emrah": 486,
+    "javi": 948,
+    "leire": 494,
+    "mabel": 813,
+    "maja": 1218
   },
   "session_counts": {
-    "belen:1": 1083
+    "abde:1": 1070,
+    "aitana:1": 470,
+    "andrea:1": 633,
+    "belen:1": 1083,
+    "dani:1": 820,
+    "emrah:1": 486,
+    "javi:1": 948,
+    "leire:1": 494,
+    "mabel:1": 813,
+    "maja:1": 1218
   },
   "handedness_counts": {
-    "LEFT": 523,
-    "RIGHT": 560
+    "RIGHT": 4004,
+    "LEFT": 4031
   },
   "accepted_by_file": {
-    "belen_s1.csv": 1083
+    "abde_s1.csv": 1070,
+    "aitana_s1.csv": 470,
+    "andrea_s1.csv": 633,
+    "belen_s1.csv": 1083,
+    "dani_s1.csv": 820,
+    "emrah_s1.csv": 486,
+    "javi_s1.csv": 948,
+    "leire_s1.csv": 494,
+    "mabel_s1.csv": 813,
+    "maja_s1.csv": 1218
   },
   "rejected_reasons": {},
   "outputs": {
