@@ -1,0 +1,48 @@
+{
+  "best_model": "logistic_regression",
+  "selection_metric": "macro_f1_loso",
+  "dataset_path": "C:\\Users\\34611\\Desktop\\GestureBot\\data\\processed\\gesture_dataset.npz",
+  "model_path": "C:\\Users\\34611\\Desktop\\GestureBot\\models\\gesture_model.joblib",
+  "number_of_samples": 8035,
+  "number_of_features": 128,
+  "subjects": [
+    "abde",
+    "aitana",
+    "andrea",
+    "belen",
+    "dani",
+    "emrah",
+    "javi",
+    "leire",
+    "mabel",
+    "maja"
+  ],
+  "classes": [
+    "FORWARD",
+    "STOP",
+    "BACKWARD",
+    "GRIPPER",
+    "OTHER"
+  ],
+  "excluded_subjects": [],
+  "metrics": {
+    "logistic_regression": {
+      "accuracy": 0.958431860609832,
+      "macro_f1": 0.9587789963633242,
+      "total_training_seconds": 3.7095557004213333,
+      "mean_inference_ms_per_sample": 0.002842837876240956
+    },
+    "random_forest": {
+      "accuracy": 0.9578095830740511,
+      "macro_f1": 0.9580574205055354,
+      "total_training_seconds": 42.733965303748846,
+      "mean_inference_ms_per_sample": 0.20993324164730015
+    },
+    "mlp": {
+      "accuracy": 0.955818294959552,
+      "macro_f1": 0.9560549537118597,
+      "total_training_seconds": 64.01863810420036,
+      "mean_inference_ms_per_sample": 0.0034039829670455637
+    }
+  }
+}

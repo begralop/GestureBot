@@ -1,16 +1,16 @@
 {
   "input_pattern": "data/raw/*_s*.csv",
   "input_files": [
-    "data/raw/abde_s1.csv",
-    "data/raw/aitana_s1.csv",
-    "data/raw/andrea_s1.csv",
-    "data/raw/belen_s1.csv",
-    "data/raw/dani_s1.csv",
-    "data/raw/emrah_s1.csv",
-    "data/raw/javi_s1.csv",
-    "data/raw/leire_s1.csv",
-    "data/raw/mabel_s1.csv",
-    "data/raw/maja_s1.csv"
+    "data\\raw\\abde_s1.csv",
+    "data\\raw\\aitana_s1.csv",
+    "data\\raw\\andrea_s1.csv",
+    "data\\raw\\belen_s1.csv",
+    "data\\raw\\dani_s1.csv",
+    "data\\raw\\emrah_s1.csv",
+    "data\\raw\\javi_s1.csv",
+    "data\\raw\\leire_s1.csv",
+    "data\\raw\\mabel_s1.csv",
+    "data\\raw\\maja_s1.csv"
   ],
   "total_rows_read": 8035,
   "accepted_rows": 8035,
@@ -71,7 +71,7 @@
   },
   "rejected_reasons": {},
   "outputs": {
-    "npz": "data/processed/gesture_dataset.npz",
-    "csv": "data/processed/gesture_dataset.csv"
+    "npz": "data\\processed\\gesture_dataset.npz",
+    "csv": "data\\processed\\gesture_dataset.csv"
   }
 }
