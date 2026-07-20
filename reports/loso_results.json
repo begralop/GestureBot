@@ -2,8 +2,8 @@
   "metadata": {
     "best_model": "logistic_regression",
     "selection_metric": "macro_f1_loso",
-    "dataset_path": "C:\\Users\\34611\\Desktop\\GestureBot\\data\\processed\\gesture_dataset.npz",
-    "model_path": "C:\\Users\\34611\\Desktop\\GestureBot\\models\\gesture_model.joblib",
+    "dataset_path": "/Users/belengrandelopez/Desktop/GestureBot/data/processed/gesture_dataset.npz",
+    "model_path": "/Users/belengrandelopez/Desktop/GestureBot/models/gesture_model.joblib",
     "number_of_samples": 8035,
     "number_of_features": 128,
     "subjects": [
@@ -30,20 +30,20 @@
       "logistic_regression": {
         "accuracy": 0.958431860609832,
         "macro_f1": 0.9587789963633242,
-        "total_training_seconds": 3.7095557004213333,
-        "mean_inference_ms_per_sample": 0.002842837876240956
+        "total_training_seconds": 1.8257033429997591,
+        "mean_inference_ms_per_sample": 0.0017182850031443127
       },
       "random_forest": {
         "accuracy": 0.9578095830740511,
         "macro_f1": 0.9580574205055354,
-        "total_training_seconds": 42.733965303748846,
-        "mean_inference_ms_per_sample": 0.20993324164730015
+        "total_training_seconds": 53.57054152300043,
+        "mean_inference_ms_per_sample": 0.09565288462976287
       },
       "mlp": {
-        "accuracy": 0.955818294959552,
-        "macro_f1": 0.9560549537118597,
-        "total_training_seconds": 64.01863810420036,
-        "mean_inference_ms_per_sample": 0.0034039829670455637
+        "accuracy": 0.9542003733665214,
+        "macro_f1": 0.9544437787550578,
+        "total_training_seconds": 34.822654789000126,
+        "mean_inference_ms_per_sample": 0.002790514250131956
       }
     }
   },
@@ -51,8 +51,8 @@
     "logistic_regression": {
       "accuracy": 0.958431860609832,
       "macro_f1": 0.9587789963633242,
-      "total_training_seconds": 3.7095557004213333,
-      "mean_inference_ms_per_sample": 0.002842837876240956,
+      "total_training_seconds": 1.8257033429997591,
+      "mean_inference_ms_per_sample": 0.0017182850031443127,
       "classification_report": {
         "FORWARD": {
           "precision": 0.9781818181818182,
@@ -140,80 +140,80 @@
           "test_samples": 1070,
           "accuracy": 0.9700934579439252,
           "macro_f1": 0.9712050418618798,
-          "training_seconds": 0.4112710990011692,
-          "mean_inference_ms_per_sample": 0.002716356348768573
+          "training_seconds": 0.21717731400008233,
+          "mean_inference_ms_per_sample": 0.002529623364599527
         },
         "aitana": {
           "test_samples": 470,
           "accuracy": 0.9574468085106383,
           "macro_f1": 0.955283460040268,
-          "training_seconds": 0.31623600050807,
-          "mean_inference_ms_per_sample": 0.003187239487120446
+          "training_seconds": 0.17261079500008236,
+          "mean_inference_ms_per_sample": 0.0019315106381791918
         },
         "andrea": {
           "test_samples": 633,
           "accuracy": 0.9447077409162717,
           "macro_f1": 0.9431618418798708,
-          "training_seconds": 0.31899770349264145,
-          "mean_inference_ms_per_sample": 0.0031908376710298126
+          "training_seconds": 0.16149178900013794,
+          "mean_inference_ms_per_sample": 0.0013390205368332215
         },
         "belen": {
           "test_samples": 1083,
           "accuracy": 0.9492151431209603,
           "macro_f1": 0.9498803134268593,
-          "training_seconds": 0.33914079889655113,
-          "mean_inference_ms_per_sample": 0.0025602031777770236
+          "training_seconds": 0.173234420999961,
+          "mean_inference_ms_per_sample": 0.001952229916939644
         },
         "dani": {
           "test_samples": 820,
           "accuracy": 1.0,
           "macro_f1": 1.0,
-          "training_seconds": 0.3512298986315727,
-          "mean_inference_ms_per_sample": 0.002645855633223929
+          "training_seconds": 0.19058052599984876,
+          "mean_inference_ms_per_sample": 0.0012230134147346956
         },
         "emrah": {
           "test_samples": 486,
           "accuracy": 0.9753086419753086,
           "macro_f1": 0.9753350176308911,
-          "training_seconds": 0.37881720066070557,
-          "mean_inference_ms_per_sample": 0.003562757262477168
+          "training_seconds": 0.19185539799991602,
+          "mean_inference_ms_per_sample": 0.0014810679014001166
         },
         "javi": {
           "test_samples": 948,
           "accuracy": 0.9092827004219409,
           "macro_f1": 0.881151735810848,
-          "training_seconds": 0.326171699911356,
-          "mean_inference_ms_per_sample": 0.003204115112371083
+          "training_seconds": 0.1673994949999269,
+          "mean_inference_ms_per_sample": 0.0016681097046002142
         },
         "leire": {
           "test_samples": 494,
           "accuracy": 0.9696356275303644,
           "macro_f1": 0.9685607572827646,
-          "training_seconds": 0.3413999006152153,
-          "mean_inference_ms_per_sample": 0.0031953413597485313
+          "training_seconds": 0.17342257399991468,
+          "mean_inference_ms_per_sample": 0.0014388441297474627
         },
         "mabel": {
           "test_samples": 813,
           "accuracy": 0.992619926199262,
           "macro_f1": 0.9931470763487713,
-          "training_seconds": 0.3944347985088825,
-          "mean_inference_ms_per_sample": 0.0027159886459876105
+          "training_seconds": 0.19767637899985857,
+          "mean_inference_ms_per_sample": 0.0011762361624627158
         },
         "maja": {
           "test_samples": 1218,
           "accuracy": 0.9400656814449918,
           "macro_f1": 0.9446827914889298,
-          "training_seconds": 0.5318566001951694,
-          "mean_inference_ms_per_sample": 0.0023973711165301316
+          "training_seconds": 0.18025465200003055,
+          "mean_inference_ms_per_sample": 0.001854631362919893
         }
       },
-      "confusion_matrix_path": "C:\\Users\\34611\\Desktop\\GestureBot\\reports\\figures\\confusion_matrix_loso_logistic_regression.png"
+      "confusion_matrix_path": "/Users/belengrandelopez/Desktop/GestureBot/reports/figures/confusion_matrix_loso_logistic_regression.png"
     },
     "random_forest": {
       "accuracy": 0.9578095830740511,
       "macro_f1": 0.9580574205055354,
-      "total_training_seconds": 42.733965303748846,
-      "mean_inference_ms_per_sample": 0.20993324164730015,
+      "total_training_seconds": 53.57054152300043,
+      "mean_inference_ms_per_sample": 0.09565288462976287,
       "classification_report": {
         "FORWARD": {
           "precision": 0.9658119658119658,
@@ -301,131 +301,131 @@
           "test_samples": 1070,
           "accuracy": 0.9476635514018692,
           "macro_f1": 0.9474436005420726,
-          "training_seconds": 4.4740260019898415,
-          "mean_inference_ms_per_sample": 0.20295214778352008
+          "training_seconds": 5.072673549000001,
+          "mean_inference_ms_per_sample": 0.05299818224293886
         },
         "aitana": {
           "test_samples": 470,
           "accuracy": 0.9446808510638298,
           "macro_f1": 0.9425776111292699,
-          "training_seconds": 4.382004201412201,
-          "mean_inference_ms_per_sample": 0.37241042294400806
+          "training_seconds": 5.316024618000029,
+          "mean_inference_ms_per_sample": 0.17029005957448
         },
         "andrea": {
           "test_samples": 633,
           "accuracy": 0.9447077409162717,
           "macro_f1": 0.9413392781598121,
-          "training_seconds": 4.287831302732229,
-          "mean_inference_ms_per_sample": 0.1935807261233458
+          "training_seconds": 5.386394027000051,
+          "mean_inference_ms_per_sample": 0.10540833333351833
         },
         "belen": {
           "test_samples": 1083,
           "accuracy": 0.9519852262234534,
           "macro_f1": 0.9529038006502535,
-          "training_seconds": 4.123360298573971,
-          "mean_inference_ms_per_sample": 0.1666036022557006
+          "training_seconds": 5.004529831000127,
+          "mean_inference_ms_per_sample": 0.09406650877181273
         },
         "dani": {
           "test_samples": 820,
           "accuracy": 0.9951219512195122,
           "macro_f1": 0.9947328633899553,
-          "training_seconds": 4.44288169965148,
-          "mean_inference_ms_per_sample": 0.21589207576542366
+          "training_seconds": 5.953240767000125,
+          "mean_inference_ms_per_sample": 0.08155986829284835
         },
         "emrah": {
           "test_samples": 486,
           "accuracy": 0.9670781893004116,
           "macro_f1": 0.9671364219775744,
-          "training_seconds": 4.344864599406719,
-          "mean_inference_ms_per_sample": 0.3167049338420232
+          "training_seconds": 5.441852096000048,
+          "mean_inference_ms_per_sample": 0.14292608847737542
         },
         "javi": {
           "test_samples": 948,
           "accuracy": 0.9261603375527426,
           "macro_f1": 0.907401213922953,
-          "training_seconds": 4.149411000311375,
-          "mean_inference_ms_per_sample": 0.16629272278099622
+          "training_seconds": 5.389911536,
+          "mean_inference_ms_per_sample": 0.0837224156118535
         },
         "leire": {
           "test_samples": 494,
           "accuracy": 0.9453441295546559,
           "macro_f1": 0.9453733129403128,
-          "training_seconds": 4.388075098395348,
-          "mean_inference_ms_per_sample": 0.3148941285455758
+          "training_seconds": 5.522891811999898,
+          "mean_inference_ms_per_sample": 0.15985959716567133
         },
         "mabel": {
           "test_samples": 813,
           "accuracy": 0.980319803198032,
           "macro_f1": 0.9814373343347521,
-          "training_seconds": 4.286319699138403,
-          "mean_inference_ms_per_sample": 0.20830676436131
+          "training_seconds": 5.398936720000165,
+          "mean_inference_ms_per_sample": 0.09465109963100646
         },
         "maja": {
           "test_samples": 1218,
           "accuracy": 0.9696223316912972,
           "macro_f1": 0.9697089148679991,
-          "training_seconds": 3.8551914021372795,
-          "mean_inference_ms_per_sample": 0.14626182163094456
+          "training_seconds": 5.084086566999986,
+          "mean_inference_ms_per_sample": 0.07520282019718977
         }
       },
-      "confusion_matrix_path": "C:\\Users\\34611\\Desktop\\GestureBot\\reports\\figures\\confusion_matrix_loso_random_forest.png"
+      "confusion_matrix_path": "/Users/belengrandelopez/Desktop/GestureBot/reports/figures/confusion_matrix_loso_random_forest.png"
     },
     "mlp": {
-      "accuracy": 0.955818294959552,
-      "macro_f1": 0.9560549537118597,
-      "total_training_seconds": 64.01863810420036,
-      "mean_inference_ms_per_sample": 0.0034039829670455637,
+      "accuracy": 0.9542003733665214,
+      "macro_f1": 0.9544437787550578,
+      "total_training_seconds": 34.822654789000126,
+      "mean_inference_ms_per_sample": 0.002790514250131956,
       "classification_report": {
         "FORWARD": {
-          "precision": 0.9829164124466138,
-          "recall": 0.9793313069908814,
-          "f1-score": 0.9811205846528623,
+          "precision": 0.9846625766871165,
+          "recall": 0.9756838905775076,
+          "f1-score": 0.9801526717557252,
           "support": 1645.0
         },
         "STOP": {
-          "precision": 0.9285262492093611,
+          "precision": 0.9279393173198482,
           "recall": 0.9708994708994709,
-          "f1-score": 0.949240219851277,
+          "f1-score": 0.9489334195216548,
           "support": 1512.0
         },
         "BACKWARD": {
-          "precision": 0.9490886235072281,
-          "recall": 0.9882198952879581,
-          "f1-score": 0.9682590573901891,
+          "precision": 0.9454887218045113,
+          "recall": 0.987565445026178,
+          "f1-score": 0.9660691421254801,
           "support": 1528.0
         },
         "GRIPPER": {
-          "precision": 0.9590062111801242,
+          "precision": 0.9542645241038319,
           "recall": 0.9631940112289458,
-          "f1-score": 0.9610955493308434,
+          "f1-score": 0.9587084756286868,
           "support": 1603.0
         },
         "OTHER": {
-          "precision": 0.9584882280049566,
-          "recall": 0.8855180309101317,
-          "f1-score": 0.9205593573341267,
+          "precision": 0.9577377252952144,
+          "recall": 0.8820835718374356,
+          "f1-score": 0.9183551847437426,
           "support": 1747.0
         },
-        "accuracy": 0.955818294959552,
+        "accuracy": 0.9542003733665214,
         "macro avg": {
-          "precision": 0.9556051448696568,
-          "recall": 0.9574325430634776,
-          "f1-score": 0.9560549537118597,
+          "precision": 0.9540185730421044,
+          "recall": 0.9558852779139076,
+          "f1-score": 0.9544437787550578,
           "support": 8035.0
         },
         "weighted avg": {
-          "precision": 0.9561670808767487,
-          "recall": 0.955818294959552,
-          "f1-score": 0.9555131022652593,
+          "precision": 0.9546203847647035,
+          "recall": 0.9542003733665214,
+          "f1-score": 0.9538852916867139,
           "support": 8035.0
         }
       },
       "confusion_matrix": [
         [
-          1611,
+          1605,
           1,
-          6,
-          26,
+          7,
+          31,
           1
         ],
         [
@@ -438,9 +438,9 @@
         [
           5,
           2,
-          1510,
+          1509,
           4,
-          7
+          8
         ],
         [
           14,
@@ -450,86 +450,86 @@
           20
         ],
         [
-          6,
-          101,
-          58,
-          35,
-          1547
+          3,
+          102,
+          63,
+          38,
+          1541
         ]
       ],
       "folds": {
         "abde": {
           "test_samples": 1070,
-          "accuracy": 0.9738317757009346,
-          "macro_f1": 0.9746845419615348,
-          "training_seconds": 7.752599600702524,
-          "mean_inference_ms_per_sample": 0.0032922409683744484
+          "accuracy": 0.9672897196261683,
+          "macro_f1": 0.9682319524046143,
+          "training_seconds": 4.060551806999911,
+          "mean_inference_ms_per_sample": 0.0021814570092794946
         },
         "aitana": {
           "test_samples": 470,
           "accuracy": 0.9340425531914893,
           "macro_f1": 0.9325382652478835,
-          "training_seconds": 6.607133101671934,
-          "mean_inference_ms_per_sample": 0.0051038300103329595
+          "training_seconds": 3.8798767719999887,
+          "mean_inference_ms_per_sample": 0.006148614893584423
         },
         "andrea": {
           "test_samples": 633,
-          "accuracy": 0.9478672985781991,
-          "macro_f1": 0.9463928758790988,
-          "training_seconds": 7.17321390286088,
-          "mean_inference_ms_per_sample": 0.004859402846386082
+          "accuracy": 0.9383886255924171,
+          "macro_f1": 0.9359385417890806,
+          "training_seconds": 3.3844598270000006,
+          "mean_inference_ms_per_sample": 0.0030516650866415536
         },
         "belen": {
           "test_samples": 1083,
           "accuracy": 0.9538319482917821,
           "macro_f1": 0.9546667137851884,
-          "training_seconds": 4.810615301132202,
-          "mean_inference_ms_per_sample": 0.002580886622435058
+          "training_seconds": 3.007159426000044,
+          "mean_inference_ms_per_sample": 0.002713610341708062
         },
         "dani": {
           "test_samples": 820,
           "accuracy": 1.0,
           "macro_f1": 1.0,
-          "training_seconds": 6.937973897904158,
-          "mean_inference_ms_per_sample": 0.002883170254346801
+          "training_seconds": 4.261424973999965,
+          "mean_inference_ms_per_sample": 0.002590346341604323
         },
         "emrah": {
           "test_samples": 486,
           "accuracy": 0.977366255144033,
           "macro_f1": 0.9774037472130734,
-          "training_seconds": 6.64210619777441,
-          "mean_inference_ms_per_sample": 0.004524487710784002
+          "training_seconds": 3.8819919699999446,
+          "mean_inference_ms_per_sample": 0.0031859794238017487
         },
         "javi": {
           "test_samples": 948,
           "accuracy": 0.8997890295358649,
           "macro_f1": 0.8647954362104031,
-          "training_seconds": 6.056225299835205,
-          "mean_inference_ms_per_sample": 0.00297289168784387
+          "training_seconds": 3.219148181000037,
+          "mean_inference_ms_per_sample": 0.0024150094937019895
         },
         "leire": {
           "test_samples": 494,
           "accuracy": 0.9615384615384616,
           "macro_f1": 0.9605509870295125,
-          "training_seconds": 6.143975000828505,
-          "mean_inference_ms_per_sample": 0.003565585444330687
+          "training_seconds": 3.163371452000092,
+          "mean_inference_ms_per_sample": 0.003006904858251035
         },
         "mabel": {
           "test_samples": 813,
           "accuracy": 0.981549815498155,
           "macro_f1": 0.9820703143244127,
-          "training_seconds": 6.316232401877642,
-          "mean_inference_ms_per_sample": 0.0032016006269724754
+          "training_seconds": 3.2678177459999915,
+          "mean_inference_ms_per_sample": 0.0024953444032274697
         },
         "maja": {
           "test_samples": 1218,
           "accuracy": 0.9400656814449918,
           "macro_f1": 0.9421247835777512,
-          "training_seconds": 5.578563399612904,
-          "mean_inference_ms_per_sample": 0.0031302959852422207
+          "training_seconds": 2.6968526340001517,
+          "mean_inference_ms_per_sample": 0.002340890804655146
         }
       },
-      "confusion_matrix_path": "C:\\Users\\34611\\Desktop\\GestureBot\\reports\\figures\\confusion_matrix_loso_mlp.png"
+      "confusion_matrix_path": "/Users/belengrandelopez/Desktop/GestureBot/reports/figures/confusion_matrix_loso_mlp.png"
     }
   }
 }

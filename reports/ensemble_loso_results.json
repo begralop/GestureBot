@@ -1,0 +1,636 @@
+{
+  "best_name": "equal",
+  "best": {
+    "weights": {
+      "logistic_regression": 1.0,
+      "random_forest": 1.0,
+      "svm_rbf": 1.0
+    },
+    "accuracy": 0.9723708774113254,
+    "macro_f1": 0.9726248385028011,
+    "per_subject": {
+      "abde": {
+        "accuracy": 0.9775700934579439,
+        "macro_f1": 0.9784791037358896
+      },
+      "aitana": {
+        "accuracy": 0.9574468085106383,
+        "macro_f1": 0.9556637334225501
+      },
+      "andrea": {
+        "accuracy": 0.95260663507109,
+        "macro_f1": 0.95057106868248
+      },
+      "belen": {
+        "accuracy": 0.974145891043398,
+        "macro_f1": 0.9747655407811202
+      },
+      "dani": {
+        "accuracy": 1.0,
+        "macro_f1": 1.0
+      },
+      "emrah": {
+        "accuracy": 0.977366255144033,
+        "macro_f1": 0.9774037472130734
+      },
+      "javi": {
+        "accuracy": 0.9440928270042194,
+        "macro_f1": 0.9326320576749495
+      },
+      "leire": {
+        "accuracy": 0.9858299595141701,
+        "macro_f1": 0.9853495026570377
+      },
+      "mabel": {
+        "accuracy": 0.993849938499385,
+        "macro_f1": 0.9942451103420163
+      },
+      "maja": {
+        "accuracy": 0.9638752052545156,
+        "macro_f1": 0.9654061112005587
+      }
+    }
+  },
+  "all_results": {
+    "equal": {
+      "weights": {
+        "logistic_regression": 1.0,
+        "random_forest": 1.0,
+        "svm_rbf": 1.0
+      },
+      "accuracy": 0.9723708774113254,
+      "macro_f1": 0.9726248385028011,
+      "per_subject": {
+        "abde": {
+          "accuracy": 0.9775700934579439,
+          "macro_f1": 0.9784791037358896
+        },
+        "aitana": {
+          "accuracy": 0.9574468085106383,
+          "macro_f1": 0.9556637334225501
+        },
+        "andrea": {
+          "accuracy": 0.95260663507109,
+          "macro_f1": 0.95057106868248
+        },
+        "belen": {
+          "accuracy": 0.974145891043398,
+          "macro_f1": 0.9747655407811202
+        },
+        "dani": {
+          "accuracy": 1.0,
+          "macro_f1": 1.0
+        },
+        "emrah": {
+          "accuracy": 0.977366255144033,
+          "macro_f1": 0.9774037472130734
+        },
+        "javi": {
+          "accuracy": 0.9440928270042194,
+          "macro_f1": 0.9326320576749495
+        },
+        "leire": {
+          "accuracy": 0.9858299595141701,
+          "macro_f1": 0.9853495026570377
+        },
+        "mabel": {
+          "accuracy": 0.993849938499385,
+          "macro_f1": 0.9942451103420163
+        },
+        "maja": {
+          "accuracy": 0.9638752052545156,
+          "macro_f1": 0.9654061112005587
+        }
+      }
+    },
+    "svm_x2": {
+      "weights": {
+        "logistic_regression": 1.0,
+        "random_forest": 1.0,
+        "svm_rbf": 2.0
+      },
+      "accuracy": 0.9717485998755445,
+      "macro_f1": 0.9719981092745543,
+      "per_subject": {
+        "abde": {
+          "accuracy": 0.9785046728971962,
+          "macro_f1": 0.9793748863783925
+        },
+        "aitana": {
+          "accuracy": 0.9553191489361702,
+          "macro_f1": 0.9546193019256048
+        },
+        "andrea": {
+          "accuracy": 0.95260663507109,
+          "macro_f1": 0.9509505860680475
+        },
+        "belen": {
+          "accuracy": 0.9686057248384118,
+          "macro_f1": 0.9694065905685694
+        },
+        "dani": {
+          "accuracy": 1.0,
+          "macro_f1": 1.0
+        },
+        "emrah": {
+          "accuracy": 0.9794238683127572,
+          "macro_f1": 0.9794652746780406
+        },
+        "javi": {
+          "accuracy": 0.9388185654008439,
+          "macro_f1": 0.9251356482553685
+        },
+        "leire": {
+          "accuracy": 0.9919028340080972,
+          "macro_f1": 0.9916083916083916
+        },
+        "mabel": {
+          "accuracy": 0.992619926199262,
+          "macro_f1": 0.9930866726411471
+        },
+        "maja": {
+          "accuracy": 0.9663382594417077,
+          "macro_f1": 0.9675485691017816
+        }
+      }
+    },
+    "svm_x3": {
+      "weights": {
+        "logistic_regression": 1.0,
+        "random_forest": 1.0,
+        "svm_rbf": 3.0
+      },
+      "accuracy": 0.9713752333540759,
+      "macro_f1": 0.9716203602996407,
+      "per_subject": {
+        "abde": {
+          "accuracy": 0.9794392523364486,
+          "macro_f1": 0.9802705836310823
+        },
+        "aitana": {
+          "accuracy": 0.9574468085106383,
+          "macro_f1": 0.9566548078327844
+        },
+        "andrea": {
+          "accuracy": 0.95260663507109,
+          "macro_f1": 0.9511388657778728
+        },
+        "belen": {
+          "accuracy": 0.9667590027700831,
+          "macro_f1": 0.9674630714561218
+        },
+        "dani": {
+          "accuracy": 1.0,
+          "macro_f1": 1.0
+        },
+        "emrah": {
+          "accuracy": 0.9794238683127572,
+          "macro_f1": 0.9794652746780406
+        },
+        "javi": {
+          "accuracy": 0.9335443037974683,
+          "macro_f1": 0.9176794131447625
+        },
+        "leire": {
+          "accuracy": 0.9939271255060729,
+          "macro_f1": 0.9938353111525362
+        },
+        "mabel": {
+          "accuracy": 0.992619926199262,
+          "macro_f1": 0.9930866726411471
+        },
+        "maja": {
+          "accuracy": 0.9671592775041051,
+          "macro_f1": 0.9681716514321724
+        }
+      }
+    },
+    "logreg_svm": {
+      "weights": {
+        "logistic_regression": 1.0,
+        "random_forest": 0.0,
+        "svm_rbf": 2.0
+      },
+      "accuracy": 0.9702551337896702,
+      "macro_f1": 0.9705364866094259,
+      "per_subject": {
+        "abde": {
+          "accuracy": 0.9775700934579439,
+          "macro_f1": 0.9784791037358896
+        },
+        "aitana": {
+          "accuracy": 0.9595744680851064,
+          "macro_f1": 0.9581573501617708
+        },
+        "andrea": {
+          "accuracy": 0.9510268562401264,
+          "macro_f1": 0.949598215735269
+        },
+        "belen": {
+          "accuracy": 0.9667590027700831,
+          "macro_f1": 0.9675605011112978
+        },
+        "dani": {
+          "accuracy": 1.0,
+          "macro_f1": 1.0
+        },
+        "emrah": {
+          "accuracy": 0.9794238683127572,
+          "macro_f1": 0.9794652746780406
+        },
+        "javi": {
+          "accuracy": 0.9356540084388185,
+          "macro_f1": 0.920546381816868
+        },
+        "leire": {
+          "accuracy": 0.9919028340080972,
+          "macro_f1": 0.9915580910317752
+        },
+        "mabel": {
+          "accuracy": 0.995079950799508,
+          "macro_f1": 0.9954009772923254
+        },
+        "maja": {
+          "accuracy": 0.9589490968801314,
+          "macro_f1": 0.960728695395634
+        }
+      }
+    },
+    "rf_svm": {
+      "weights": {
+        "logistic_regression": 0.0,
+        "random_forest": 1.0,
+        "svm_rbf": 2.0
+      },
+      "accuracy": 0.9705040448039826,
+      "macro_f1": 0.9707294851494925,
+      "per_subject": {
+        "abde": {
+          "accuracy": 0.9794392523364486,
+          "macro_f1": 0.9802705836310823
+        },
+        "aitana": {
+          "accuracy": 0.9425531914893617,
+          "macro_f1": 0.9421930694343559
+        },
+        "andrea": {
+          "accuracy": 0.9557661927330173,
+          "macro_f1": 0.9542583570668824
+        },
+        "belen": {
+          "accuracy": 0.9686057248384118,
+          "macro_f1": 0.9692081609744644
+        },
+        "dani": {
+          "accuracy": 1.0,
+          "macro_f1": 1.0
+        },
+        "emrah": {
+          "accuracy": 0.9794238683127572,
+          "macro_f1": 0.9794652746780406
+        },
+        "javi": {
+          "accuracy": 0.9251054852320675,
+          "macro_f1": 0.9058397489527111
+        },
+        "leire": {
+          "accuracy": 0.9939271255060729,
+          "macro_f1": 0.993992919218907
+        },
+        "mabel": {
+          "accuracy": 0.992619926199262,
+          "macro_f1": 0.9930866726411471
+        },
+        "maja": {
+          "accuracy": 0.9704433497536946,
+          "macro_f1": 0.9707890148191126
+        }
+      }
+    },
+    "logreg_x2_svm_x3": {
+      "weights": {
+        "logistic_regression": 2.0,
+        "random_forest": 1.0,
+        "svm_rbf": 3.0
+      },
+      "accuracy": 0.9717485998755445,
+      "macro_f1": 0.9720196659823929,
+      "per_subject": {
+        "abde": {
+          "accuracy": 0.9775700934579439,
+          "macro_f1": 0.9784791037358896
+        },
+        "aitana": {
+          "accuracy": 0.9595744680851064,
+          "macro_f1": 0.958170373816106
+        },
+        "andrea": {
+          "accuracy": 0.95260663507109,
+          "macro_f1": 0.9508086634723195
+        },
+        "belen": {
+          "accuracy": 0.9695290858725761,
+          "macro_f1": 0.9703291203298832
+        },
+        "dani": {
+          "accuracy": 1.0,
+          "macro_f1": 1.0
+        },
+        "emrah": {
+          "accuracy": 0.9794238683127572,
+          "macro_f1": 0.9794652746780406
+        },
+        "javi": {
+          "accuracy": 0.9440928270042194,
+          "macro_f1": 0.9324583056272413
+        },
+        "leire": {
+          "accuracy": 0.9898785425101214,
+          "macro_f1": 0.989478487614081
+        },
+        "mabel": {
+          "accuracy": 0.993849938499385,
+          "macro_f1": 0.9942451103420163
+        },
+        "maja": {
+          "accuracy": 0.9605911330049262,
+          "macro_f1": 0.9623193864441996
+        }
+      }
+    },
+    "rf_x2_svm_x3": {
+      "weights": {
+        "logistic_regression": 1.0,
+        "random_forest": 2.0,
+        "svm_rbf": 3.0
+      },
+      "accuracy": 0.9712507778469197,
+      "macro_f1": 0.9714775446312798,
+      "per_subject": {
+        "abde": {
+          "accuracy": 0.9794392523364486,
+          "macro_f1": 0.9802705836310823
+        },
+        "aitana": {
+          "accuracy": 0.9553191489361702,
+          "macro_f1": 0.9545914486090818
+        },
+        "andrea": {
+          "accuracy": 0.95260663507109,
+          "macro_f1": 0.9509862880800928
+        },
+        "belen": {
+          "accuracy": 0.9676823638042474,
+          "macro_f1": 0.968418876092603
+        },
+        "dani": {
+          "accuracy": 1.0,
+          "macro_f1": 1.0
+        },
+        "emrah": {
+          "accuracy": 0.9794238683127572,
+          "macro_f1": 0.9794652746780406
+        },
+        "javi": {
+          "accuracy": 0.9314345991561181,
+          "macro_f1": 0.9146589189320429
+        },
+        "leire": {
+          "accuracy": 0.9939271255060729,
+          "macro_f1": 0.9938353111525362
+        },
+        "mabel": {
+          "accuracy": 0.991389913899139,
+          "macro_f1": 0.9919256001730229
+        },
+        "maja": {
+          "accuracy": 0.9688013136288999,
+          "macro_f1": 0.9695116422498262
+        }
+      }
+    }
+  },
+  "fold_info": {
+    "abde": {
+      "samples": 1070,
+      "models": {
+        "logistic_regression": {
+          "accuracy": 0.9700934579439252,
+          "macro_f1": 0.9712050418618798,
+          "training_seconds": 0.22556369399990217
+        },
+        "random_forest": {
+          "accuracy": 0.9448598130841122,
+          "macro_f1": 0.9445365467092971,
+          "training_seconds": 6.078440689000217
+        },
+        "svm_rbf": {
+          "accuracy": 0.9794392523364486,
+          "macro_f1": 0.9802705836310823,
+          "training_seconds": 1.6984239270000216
+        }
+      }
+    },
+    "aitana": {
+      "samples": 470,
+      "models": {
+        "logistic_regression": {
+          "accuracy": 0.9574468085106383,
+          "macro_f1": 0.955283460040268,
+          "training_seconds": 0.19295300999965548
+        },
+        "random_forest": {
+          "accuracy": 0.9446808510638298,
+          "macro_f1": 0.9425776111292699,
+          "training_seconds": 6.916077992999817
+        },
+        "svm_rbf": {
+          "accuracy": 0.9446808510638298,
+          "macro_f1": 0.9440539207501694,
+          "training_seconds": 2.5409548610000456
+        }
+      }
+    },
+    "andrea": {
+      "samples": 633,
+      "models": {
+        "logistic_regression": {
+          "accuracy": 0.9447077409162717,
+          "macro_f1": 0.9431618418798708,
+          "training_seconds": 0.25625397600015276
+        },
+        "random_forest": {
+          "accuracy": 0.943127962085308,
+          "macro_f1": 0.9389900100941236,
+          "training_seconds": 8.052603911000006
+        },
+        "svm_rbf": {
+          "accuracy": 0.9541864139020537,
+          "macro_f1": 0.9526236519027655,
+          "training_seconds": 2.4627909319997343
+        }
+      }
+    },
+    "belen": {
+      "samples": 1083,
+      "models": {
+        "logistic_regression": {
+          "accuracy": 0.9492151431209603,
+          "macro_f1": 0.9498803134268593,
+          "training_seconds": 0.2782017969998378
+        },
+        "random_forest": {
+          "accuracy": 0.9556786703601108,
+          "macro_f1": 0.9562998565051203,
+          "training_seconds": 7.2886657359999845
+        },
+        "svm_rbf": {
+          "accuracy": 0.9630655586334257,
+          "macro_f1": 0.963622672057759,
+          "training_seconds": 2.07644630599998
+        }
+      }
+    },
+    "dani": {
+      "samples": 820,
+      "models": {
+        "logistic_regression": {
+          "accuracy": 1.0,
+          "macro_f1": 1.0,
+          "training_seconds": 0.2561552990000564
+        },
+        "random_forest": {
+          "accuracy": 0.9963414634146341,
+          "macro_f1": 0.9960853287533908,
+          "training_seconds": 7.403936908000105
+        },
+        "svm_rbf": {
+          "accuracy": 1.0,
+          "macro_f1": 1.0,
+          "training_seconds": 2.444571504999658
+        }
+      }
+    },
+    "emrah": {
+      "samples": 486,
+      "models": {
+        "logistic_regression": {
+          "accuracy": 0.9753086419753086,
+          "macro_f1": 0.9753350176308911,
+          "training_seconds": 0.27775647199996456
+        },
+        "random_forest": {
+          "accuracy": 0.9670781893004116,
+          "macro_f1": 0.9671364219775744,
+          "training_seconds": 7.755133909000051
+        },
+        "svm_rbf": {
+          "accuracy": 0.9794238683127572,
+          "macro_f1": 0.9794652746780406,
+          "training_seconds": 2.472919157999968
+        }
+      }
+    },
+    "javi": {
+      "samples": 948,
+      "models": {
+        "logistic_regression": {
+          "accuracy": 0.9092827004219409,
+          "macro_f1": 0.881151735810848,
+          "training_seconds": 0.23874983400037308
+        },
+        "random_forest": {
+          "accuracy": 0.9251054852320675,
+          "macro_f1": 0.9058250934113182,
+          "training_seconds": 7.1872297419999995
+        },
+        "svm_rbf": {
+          "accuracy": 0.9251054852320675,
+          "macro_f1": 0.9060197803102413,
+          "training_seconds": 2.3552112900001703
+        }
+      }
+    },
+    "leire": {
+      "samples": 494,
+      "models": {
+        "logistic_regression": {
+          "accuracy": 0.9696356275303644,
+          "macro_f1": 0.9685607572827646,
+          "training_seconds": 0.2517745410000316
+        },
+        "random_forest": {
+          "accuracy": 0.9473684210526315,
+          "macro_f1": 0.9476460402130401,
+          "training_seconds": 7.668978036999761
+        },
+        "svm_rbf": {
+          "accuracy": 0.9939271255060729,
+          "macro_f1": 0.993992919218907,
+          "training_seconds": 2.5596447299999454
+        }
+      }
+    },
+    "mabel": {
+      "samples": 813,
+      "models": {
+        "logistic_regression": {
+          "accuracy": 0.992619926199262,
+          "macro_f1": 0.9931470763487713,
+          "training_seconds": 0.2757483609998417
+        },
+        "random_forest": {
+          "accuracy": 0.981549815498155,
+          "macro_f1": 0.9825914368675923,
+          "training_seconds": 7.298492045999865
+        },
+        "svm_rbf": {
+          "accuracy": 0.995079950799508,
+          "macro_f1": 0.9954009772923254,
+          "training_seconds": 2.3933315440003753
+        }
+      }
+    },
+    "maja": {
+      "samples": 1218,
+      "models": {
+        "logistic_regression": {
+          "accuracy": 0.9400656814449918,
+          "macro_f1": 0.9446827914889298,
+          "training_seconds": 0.2513831010001013
+        },
+        "random_forest": {
+          "accuracy": 0.9671592775041051,
+          "macro_f1": 0.9672688239971077,
+          "training_seconds": 6.648663034000037
+        },
+        "svm_rbf": {
+          "accuracy": 0.9679802955665024,
+          "macro_f1": 0.9686536611740342,
+          "training_seconds": 2.151512937999996
+        }
+      }
+    }
+  },
+  "elapsed_seconds": 113.75646320299984,
+  "dataset": "/Users/belengrandelopez/Desktop/GestureBot/data/processed/gesture_dataset.npz",
+  "subjects": [
+    "abde",
+    "aitana",
+    "andrea",
+    "belen",
+    "dani",
+    "emrah",
+    "javi",
+    "leire",
+    "mabel",
+    "maja"
+  ],
+  "labels": [
+    "FORWARD",
+    "STOP",
+    "BACKWARD",
+    "GRIPPER",
+    "OTHER"
+  ]
+}
