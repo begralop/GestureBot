@@ -179,43 +179,321 @@ def draw_overlay(
     subject: str,
     session: str,
     hand_status: str,
+    sample_every: int,
 ) -> None:
-    cv2.rectangle(frame, (0, 0), (590, 245), (15, 15, 15), -1)
+    height, width = frame.shape[:2]
 
-    state_text = "GRABANDO" if recording else "PAUSADO"
-    state_color = (50, 50, 255) if recording else (180, 180, 180)
+    panel_x = 20
+    panel_y = 20
+    panel_w = min(460, max(370, width // 3 + 35))
+    footer_h = 84
+    footer_y = height - footer_h - 20
+    panel_h = min(540, footer_y - panel_y - 14)
 
-    lines = [
-        (f"Persona: {subject} | Sesion: {session}", (255, 255, 255)),
-        (f"Clase seleccionada: {selected_label}", (80, 255, 120)),
-        (f"Estado: {state_text}", state_color),
-        (hand_status, (255, 220, 80)),
-        ("1 FORWARD | 2 STOP | 3 BACKWARD | 4 GRIPPER | 0 OTHER", (255, 255, 255)),
-        ("R grabar/pausar | Q/ESC salir", (255, 255, 255)),
-        (
-            "Muestras: "
-            + " | ".join(
-                f"{label}:{counts[label]}"
+    total_samples = sum(
+        int(counts[label])
+        for label in ("FORWARD", "STOP", "BACKWARD", "GRIPPER", "OTHER")
+    )
+    max_count = max(
+        1,
+        max(
+            (
+                counts[label]
                 for label in ("FORWARD", "STOP", "BACKWARD", "GRIPPER", "OTHER")
             ),
-            (255, 255, 255),
+            default=1,
         ),
-    ]
+    )
 
-    y = 28
-    for text, color in lines:
-        scale = 0.54 if len(text) > 55 else 0.65
+    # Palette (BGR)
+    bg = (16, 23, 34)
+    border = (63, 78, 104)
+    accent = (210, 96, 38)
+    text_main = (245, 248, 252)
+    text_muted = (176, 188, 208)
+    card_bg = (27, 36, 50)
+    track = (42, 49, 62)
+    selected_border = (96, 165, 250)
+    state_color = (37, 99, 235) if recording else (59, 130, 246)
+    pill_text = "RECORDING" if recording else "PAUSED"
+
+    palette = {
+        "FORWARD": (246, 130, 59),
+        "STOP": (99, 102, 241),
+        "BACKWARD": (196, 113, 248),
+        "GRIPPER": (45, 212, 191),
+        "OTHER": (8, 179, 234),
+    }
+
+    def fit_text(value: str, limit: int = 24) -> str:
+        value = str(value)
+        return value if len(value) <= limit else value[: limit - 3] + "..."
+
+    def put_centered(
+        text_value: str,
+        x1: int,
+        y1: int,
+        x2: int,
+        y2: int,
+        scale: float,
+        color: tuple[int, int, int],
+        thickness: int = 1,
+    ) -> None:
+        (tw, th), _ = cv2.getTextSize(
+            text_value,
+            cv2.FONT_HERSHEY_DUPLEX,
+            scale,
+            thickness,
+        )
+        tx = x1 + max(0, (x2 - x1 - tw) // 2)
+        ty = y1 + max(th + 4, (y2 - y1 + th) // 2)
         cv2.putText(
             frame,
-            text,
-            (15, y),
-            cv2.FONT_HERSHEY_SIMPLEX,
+            text_value,
+            (tx, ty),
+            cv2.FONT_HERSHEY_DUPLEX,
             scale,
             color,
-            2,
+            thickness,
             cv2.LINE_AA,
         )
-        y += 31
+
+    # Background cards.
+    overlay = frame.copy()
+    cv2.rectangle(
+        overlay,
+        (panel_x, panel_y),
+        (panel_x + panel_w, panel_y + panel_h),
+        bg,
+        -1,
+    )
+    cv2.rectangle(
+        overlay,
+        (20, footer_y),
+        (width - 20, footer_y + footer_h),
+        bg,
+        -1,
+    )
+    cv2.addWeighted(overlay, 0.82, frame, 0.18, 0, frame)
+    cv2.rectangle(
+        frame,
+        (panel_x, panel_y),
+        (panel_x + panel_w, panel_y + panel_h),
+        border,
+        1,
+    )
+    cv2.rectangle(
+        frame,
+        (20, footer_y),
+        (width - 20, footer_y + footer_h),
+        border,
+        1,
+    )
+
+    # Header.
+    header_h = 48
+    cv2.rectangle(
+        frame,
+        (panel_x, panel_y),
+        (panel_x + panel_w, panel_y + header_h),
+        accent,
+        -1,
+    )
+    put_centered(
+        "GESTUREBOT",
+        panel_x,
+        panel_y,
+        panel_x + panel_w,
+        panel_y + header_h,
+        0.90,
+        (255, 255, 255),
+        2,
+    )
+
+    # Recording state.
+    pill_w = 182
+    pill_h = 42
+    pill_x = panel_x + panel_w - pill_w - 18
+    pill_y = panel_y + header_h + 18
+    cv2.rectangle(
+        frame,
+        (pill_x, pill_y),
+        (pill_x + pill_w, pill_y + pill_h),
+        state_color,
+        -1,
+    )
+    put_centered(
+        pill_text,
+        pill_x,
+        pill_y,
+        pill_x + pill_w,
+        pill_y + pill_h,
+        0.82,
+        (255, 255, 255),
+        2,
+    )
+
+    # Identification data. The explicit coordinates keep LABEL clear of the card below.
+    info_x = panel_x + 18
+    info_rows = [
+        ("SUBJECT", fit_text(subject, 18), panel_y + 82),
+        ("SESSION", fit_text(session, 18), panel_y + 154),
+        ("LABEL", fit_text(selected_label, 18), panel_y + 226),
+    ]
+    for title, value, y in info_rows:
+        cv2.putText(
+            frame,
+            title,
+            (info_x, y),
+            cv2.FONT_HERSHEY_DUPLEX,
+            0.45,
+            text_muted,
+            1,
+            cv2.LINE_AA,
+        )
+        cv2.putText(
+            frame,
+            value,
+            (info_x, y + 34),
+            cv2.FONT_HERSHEY_DUPLEX,
+            0.78,
+            text_main,
+            1,
+            cv2.LINE_AA,
+        )
+
+    # Samples and hand status. The status already arrives as RIGHT | C: 99%.
+    stats_y = panel_y + 282
+    cv2.rectangle(
+        frame,
+        (panel_x + 14, stats_y),
+        (panel_x + panel_w - 14, stats_y + 66),
+        card_bg,
+        -1,
+    )
+    cv2.putText(
+        frame,
+        "TOTAL SAMPLES",
+        (panel_x + 24, stats_y + 19),
+        cv2.FONT_HERSHEY_DUPLEX,
+        0.43,
+        text_muted,
+        1,
+        cv2.LINE_AA,
+    )
+    cv2.putText(
+        frame,
+        str(total_samples),
+        (panel_x + 24, stats_y + 50),
+        cv2.FONT_HERSHEY_DUPLEX,
+        0.92,
+        text_main,
+        1,
+        cv2.LINE_AA,
+    )
+    cv2.putText(
+        frame,
+        f"HAND: {fit_text(hand_status, 20)}",
+        (panel_x + 126, stats_y + 45),
+        cv2.FONT_HERSHEY_DUPLEX,
+        0.46,
+        text_main,
+        1,
+        cv2.LINE_AA,
+    )
+
+    # Counts.
+    section_y = stats_y + 92
+    cv2.putText(
+        frame,
+        "CLASS COUNTS",
+        (panel_x + 14, section_y),
+        cv2.FONT_HERSHEY_DUPLEX,
+        0.46,
+        text_muted,
+        1,
+        cv2.LINE_AA,
+    )
+    bar_y = section_y + 18
+    bar_x = panel_x + 150
+    bar_w = panel_w - 192
+    bar_h = 11
+
+    for label in ("FORWARD", "STOP", "BACKWARD", "GRIPPER", "OTHER"):
+        count = int(counts[label])
+        cv2.putText(
+            frame,
+            label,
+            (panel_x + 18, bar_y + 11),
+            cv2.FONT_HERSHEY_DUPLEX,
+            0.50,
+            text_main,
+            1,
+            cv2.LINE_AA,
+        )
+        cv2.rectangle(
+            frame,
+            (bar_x, bar_y),
+            (bar_x + bar_w, bar_y + bar_h),
+            track,
+            -1,
+        )
+        filled = int(bar_w * (count / max_count))
+        cv2.rectangle(
+            frame,
+            (bar_x, bar_y),
+            (bar_x + filled, bar_y + bar_h),
+            palette[label],
+            -1,
+        )
+        cv2.putText(
+            frame,
+            str(count),
+            (panel_x + panel_w - 34, bar_y + 11),
+            cv2.FONT_HERSHEY_DUPLEX,
+            0.46,
+            text_main,
+            1,
+            cv2.LINE_AA,
+        )
+        if label == selected_label:
+            cv2.rectangle(
+                frame,
+                (panel_x + 10, bar_y - 7),
+                (panel_x + panel_w - 10, bar_y + 20),
+                selected_border,
+                1,
+            )
+        bar_y += 24
+
+    # Footer shortcuts.
+    cv2.putText(
+        frame,
+        "SHORTCUTS",
+        (34, footer_y + 22),
+        cv2.FONT_HERSHEY_DUPLEX,
+        0.46,
+        text_muted,
+        1,
+        cv2.LINE_AA,
+    )
+    footer_lines = [
+        "1 Forward   2 Stop   3 Backward   4 Gripper   0 Other",
+        "R Record / Pause   Q or ESC Exit",
+        f"Save 1 sample every {max(1, sample_every)} frames",
+    ]
+    for i, line in enumerate(footer_lines):
+        cv2.putText(
+            frame,
+            line,
+            (34, footer_y + 45 + i * 16),
+            cv2.FONT_HERSHEY_DUPLEX,
+            0.39,
+            text_main,
+            1,
+            cv2.LINE_AA,
+        )
+
 
 
 def main() -> int:
@@ -263,6 +541,8 @@ def main() -> int:
 
     print(f"Dataset: {output_path}")
     print("Controles: 1/2/3/4/0 seleccionan clase, R graba, Q/ESC sale.")
+    cv2.namedWindow("GestureBot", cv2.WINDOW_NORMAL)
+    cv2.resizeWindow("GestureBot", 1280, 720)
 
     try:
         with mp.tasks.vision.HandLandmarker.create_from_options(options) as landmarker:
@@ -303,8 +583,9 @@ def main() -> int:
                             subject=args.subject,
                             session=args.session,
                             hand_status=hand_status,
+                            sample_every=args.sample_every,
                         )
-                        cv2.imshow("GestureBot - Dataset Collector", frame)
+                        cv2.imshow("GestureBot — Dataset Studio", frame)
                         key = cv2.waitKey(1) & 0xFF
 
                         if key in LABEL_KEYS:
@@ -328,7 +609,7 @@ def main() -> int:
                         handedness_score = float(category.score or 0.0)
 
                     hand_status = (
-                        f"Mano: {handedness} | confianza: {handedness_score:.2f}"
+                        f"{handedness} | C: {handedness_score * 100:.0f}%"
                     )
 
                     if recording and frame_number % args.sample_every == 0:
@@ -352,9 +633,10 @@ def main() -> int:
                     subject=args.subject,
                     session=args.session,
                     hand_status=hand_status,
+                    sample_every=args.sample_every,
                 )
 
-                cv2.imshow("GestureBot - Dataset Collector", frame)
+                cv2.imshow("GestureBot — Dataset Studio", frame)
                 key = cv2.waitKey(1) & 0xFF
 
                 if key in LABEL_KEYS:

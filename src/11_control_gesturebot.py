@@ -94,6 +94,34 @@ COMMAND_CONFIG = {
 }
 
 
+UI = {
+    "bg": "#0b1220",
+    "panel": "#121a2b",
+    "card": "#182338",
+    "card_alt": "#1d2942",
+    "border": "#2b3a58",
+    "text": "#e5eefb",
+    "muted": "#9fb0cf",
+    "accent": "#5eead4",
+    "accent_2": "#60a5fa",
+    "good": "#22c55e",
+    "warn": "#f59e0b",
+    "danger": "#ef4444",
+    "video_bg": "#030712",
+}
+
+FONT = {
+    "title": ("Segoe UI", 24, "bold"),
+    "subtitle": ("Segoe UI", 10),
+    "section": ("Segoe UI", 12, "bold"),
+    "label": ("Segoe UI", 10, "bold"),
+    "value": ("Segoe UI", 10),
+    "value_big": ("Segoe UI", 11, "bold"),
+    "button": ("Segoe UI", 10, "bold"),
+    "badge": ("Segoe UI", 9, "bold"),
+}
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="GestureBot: modelo en tiempo real y control simulado/ESP32."
@@ -336,11 +364,11 @@ class GestureBotApp:
         self.prediction_var = tk.StringVar(value="--")
         self.confidence_var = tk.StringVar(value="--")
         self.stability_var = tk.StringVar(value=f"0/{args.confirm_frames}")
-        self.hand_var = tk.StringVar(value="--")
+        self.hand_var = tk.StringVar(value="No hand detected")
         self.command_var = tk.StringVar(value="STOP")
-        self.action_var = tk.StringVar(value="Robot detenido")
-        self.connection_var = tk.StringVar(value="Modo simulación")
-        self.performance_var = tk.StringVar(value="Inferencia: -- | FPS: --")
+        self.action_var = tk.StringVar(value="Robot stopped")
+        self.connection_var = tk.StringVar(value="Simulation mode active")
+        self.performance_var = tk.StringVar(value="Inference: -- | FPS: --")
 
         self._validate_arguments()
         self._load_resources()
@@ -399,126 +427,261 @@ class GestureBotApp:
 
     def _build_interface(self) -> None:
         self.root.title("Control GestureBot — IA + ESP32")
-        self.root.geometry("1120x720")
-        self.root.minsize(950, 650)
+        self.root.geometry("1320x840")
+        self.root.minsize(1160, 760)
+        self.root.configure(bg=UI["bg"])
 
-        title = tk.Label(
-            self.root,
-            text="Control de GestureBot",
-            font=("Arial", 20, "bold"),
+        header = tk.Frame(self.root, bg=UI["bg"])
+        header.pack(fill="x", padx=22, pady=(18, 8))
+
+        title_col = tk.Frame(header, bg=UI["bg"])
+        title_col.pack(side="left", fill="x", expand=True)
+        tk.Label(
+            title_col,
+            text="GestureBot Control Center",
+            bg=UI["bg"],
+            fg=UI["text"],
+            font=FONT["title"],
+        ).pack(anchor="w")
+        tk.Label(
+            title_col,
+            text=(
+                "Webcam + MediaPipe + ensemble + temporal filter + "
+                "simulation/ESP32 control"
+            ),
+            bg=UI["bg"],
+            fg=UI["muted"],
+            font=FONT["subtitle"],
+        ).pack(anchor="w", pady=(4, 0))
+
+        self.mode_badge = tk.Label(
+            header,
+            text="SIMULATION MODE",
+            bg="#133127",
+            fg="#8ef0b0",
+            font=FONT["badge"],
+            padx=14,
+            pady=8,
         )
-        title.pack(pady=(14, 8))
+        self.mode_badge.pack(side="right", anchor="ne")
 
-        body = tk.Frame(self.root)
-        body.pack(fill="both", expand=True, padx=16, pady=8)
+        body = tk.Frame(self.root, bg=UI["bg"])
+        body.pack(fill="both", expand=True, padx=22, pady=(6, 18))
 
-        left = tk.Frame(body)
-        left.pack(side="left", fill="both", expand=True, padx=(0, 12))
+        left = tk.Frame(body, bg=UI["panel"], highlightbackground=UI["border"], highlightthickness=1)
+        left.pack(side="left", fill="both", expand=True, padx=(0, 14))
 
+        video_header = tk.Frame(left, bg=UI["panel"])
+        video_header.pack(fill="x", padx=16, pady=(14, 8))
+        tk.Label(
+            video_header,
+            text="Live camera",
+            bg=UI["panel"],
+            fg=UI["text"],
+            font=FONT["section"],
+        ).pack(anchor="w")
+        tk.Label(
+            video_header,
+            text="Real-time preview with landmarks and command overlay",
+            bg=UI["panel"],
+            fg=UI["muted"],
+            font=("Segoe UI", 9),
+        ).pack(anchor="w", pady=(2, 0))
+
+        video_wrap = tk.Frame(left, bg=UI["video_bg"], highlightbackground=UI["border"], highlightthickness=1)
+        video_wrap.pack(fill="both", expand=True, padx=16, pady=(0, 16))
         self.video_label = tk.Label(
-            left,
-            text="Iniciando cámara...",
-            bg="black",
-            fg="white",
+            video_wrap,
+            text="Starting camera...",
+            bg=UI["video_bg"],
+            fg=UI["muted"],
+            font=("Segoe UI", 12),
         )
-        self.video_label.pack(fill="both", expand=True)
+        self.video_label.pack(fill="both", expand=True, padx=10, pady=10)
 
-        right = tk.Frame(body, width=350, bd=1, relief="solid")
+        right = tk.Frame(body, bg=UI["panel"], width=390, highlightbackground=UI["border"], highlightthickness=1)
         right.pack(side="right", fill="y")
         right.pack_propagate(False)
 
-        tk.Label(
-            right,
-            text="Predicción del modelo",
-            font=("Arial", 15, "bold"),
-        ).pack(pady=(18, 10))
+        scroll = tk.Frame(right, bg=UI["panel"])
+        scroll.pack(fill="both", expand=True, padx=14, pady=14)
 
-        self._status_row(right, "Mano", self.hand_var)
-        self._status_row(right, "Predicción", self.prediction_var)
-        self._status_row(right, "Confianza", self.confidence_var)
-        self._status_row(right, "Estabilidad", self.stability_var)
-        self._status_row(right, "Comando", self.command_var)
-        self._status_row(right, "Acción", self.action_var, wraplength=210)
-        self._status_row(right, "Rendimiento", self.performance_var, wraplength=210)
+        self._make_section_title(scroll, "Model status", "Live output of the recognition pipeline")
+        metrics = tk.Frame(scroll, bg=UI["panel"])
+        metrics.pack(fill="x", pady=(0, 10))
+        self._status_row(metrics, "Hand", self.hand_var)
+        self._status_row(metrics, "Prediction", self.prediction_var)
+        self._status_row(metrics, "Confidence", self.confidence_var)
+        self._status_row(metrics, "Stability", self.stability_var)
+        self._status_row(metrics, "Command", self.command_var)
+        self._status_row(metrics, "Action", self.action_var, wraplength=240)
+        self._status_row(metrics, "Performance", self.performance_var, wraplength=240)
 
-        tk.Frame(right, height=1, bg="#cccccc").pack(
-            fill="x", padx=18, pady=14
-        )
+        self._make_section_title(scroll, "Communication", "Switch between simulation and the physical ESP32")
+        comm_card = tk.Frame(scroll, bg=UI["card"], highlightbackground=UI["border"], highlightthickness=1)
+        comm_card.pack(fill="x", pady=(0, 10))
 
-        tk.Label(
-            right,
-            text="Comunicación",
-            font=("Arial", 14, "bold"),
-        ).pack(pady=(0, 8))
-
+        top_line = tk.Frame(comm_card, bg=UI["card"])
+        top_line.pack(fill="x", padx=14, pady=(14, 8))
         tk.Checkbutton(
-            right,
-            text="Modo simulación (sin ESP32)",
+            top_line,
+            text="Simulation mode (without ESP32)",
             variable=self.simulation_var,
             command=self._on_mode_change,
-            font=("Arial", 11),
-        ).pack(anchor="w", padx=20, pady=4)
+            bg=UI["card"],
+            fg=UI["text"],
+            activebackground=UI["card"],
+            activeforeground=UI["text"],
+            selectcolor=UI["card_alt"],
+            font=("Segoe UI", 10),
+            highlightthickness=0,
+            bd=0,
+        ).pack(anchor="w")
 
-        ip_frame = tk.Frame(right)
-        ip_frame.pack(fill="x", padx=20, pady=6)
-        tk.Label(ip_frame, text="IP ESP32:").pack(side="left")
-        tk.Entry(ip_frame, textvariable=self.ip_var, width=16).pack(
-            side="right"
+        ip_line = tk.Frame(comm_card, bg=UI["card"])
+        ip_line.pack(fill="x", padx=14, pady=(0, 8))
+        tk.Label(
+            ip_line,
+            text="ESP32 IP",
+            bg=UI["card"],
+            fg=UI["muted"],
+            font=FONT["label"],
+        ).pack(anchor="w")
+        self.ip_entry = tk.Entry(
+            ip_line,
+            textvariable=self.ip_var,
+            bg=UI["card_alt"],
+            fg=UI["text"],
+            insertbackground=UI["text"],
+            relief="flat",
+            font=("Consolas", 11),
+            highlightthickness=1,
+            highlightbackground=UI["border"],
+            highlightcolor=UI["accent_2"],
         )
+        self.ip_entry.pack(fill="x", pady=(6, 0), ipady=7)
+        self.ip_entry.bind("<Return>", self._apply_ip)
+        self.ip_entry.bind("<FocusOut>", self._apply_ip)
 
-        tk.Label(
-            right,
-            textvariable=self.connection_var,
-            font=("Arial", 11, "bold"),
-            wraplength=300,
-            justify="left",
-        ).pack(fill="x", padx=20, pady=8)
-
+        btn_row = tk.Frame(comm_card, bg=UI["card"])
+        btn_row.pack(fill="x", padx=14, pady=(8, 10))
         tk.Button(
-            right,
-            text="PARADA DE EMERGENCIA",
-            command=lambda: self.dispatch_command("STOP", force=True),
-            bg="#cc3333",
-            fg="white",
-            font=("Arial", 12, "bold"),
-            height=2,
-        ).pack(fill="x", padx=20, pady=(12, 8))
+            btn_row,
+            text="TEST CONNECTION",
+            command=self._test_connection,
+            bg=UI["accent_2"],
+            fg="#07111f",
+            activebackground="#3b82f6",
+            activeforeground="#07111f",
+            relief="flat",
+            font=FONT["button"],
+            cursor="hand2",
+            padx=10,
+            pady=9,
+        ).pack(side="left", fill="x", expand=True)
 
         tk.Label(
-            right,
-            text=(
-                "Teclas de prueba: ← FORWARD · → BACKWARD · "
-                "↓ STOP · ↑ GRIPPER"
-            ),
-            font=("Arial", 9),
-            wraplength=300,
+            comm_card,
+            textvariable=self.connection_var,
+            bg=UI["card"],
+            fg=UI["text"],
+            font=("Segoe UI", 9),
+            wraplength=320,
             justify="left",
-        ).pack(fill="x", padx=20, pady=(8, 16))
+            anchor="w",
+        ).pack(fill="x", padx=14, pady=(0, 14))
 
-    @staticmethod
+        self._make_section_title(scroll, "Quick actions", "Emergency stop and keyboard shortcuts")
+        action_card = tk.Frame(scroll, bg=UI["card"], highlightbackground=UI["border"], highlightthickness=1)
+        action_card.pack(fill="x", pady=(0, 10))
+        tk.Button(
+            action_card,
+            text="EMERGENCY STOP",
+            command=lambda: self.dispatch_command("STOP", force=True),
+            bg=UI["danger"],
+            fg="white",
+            activebackground="#dc2626",
+            activeforeground="white",
+            relief="flat",
+            font=("Segoe UI", 12, "bold"),
+            cursor="hand2",
+            padx=10,
+            pady=12,
+        ).pack(fill="x", padx=14, pady=(14, 10))
+        tk.Label(
+            action_card,
+            text=(
+                "Test keys:\n"
+                "← Forward   ·   → Backward\n"
+                "↓ Stop      ·   ↑ Gripper"
+            ),
+            bg=UI["card"],
+            fg=UI["muted"],
+            font=("Segoe UI", 9),
+            justify="left",
+        ).pack(anchor="w", padx=14, pady=(0, 14))
+
+        footer = tk.Label(
+            scroll,
+            text="Tip: click on the video area or the window before using the arrow keys.",
+            bg=UI["panel"],
+            fg=UI["muted"],
+            font=("Segoe UI", 8),
+            justify="left",
+        )
+        footer.pack(anchor="w", pady=(4, 0))
+
+        self._refresh_mode_badge()
+
+    def _make_section_title(self, parent: tk.Widget, title: str, subtitle: str) -> None:
+        frame = tk.Frame(parent, bg=UI["panel"])
+        frame.pack(fill="x", pady=(0, 8))
+        tk.Label(
+            frame,
+            text=title,
+            bg=UI["panel"],
+            fg=UI["text"],
+            font=FONT["section"],
+        ).pack(anchor="w")
+        tk.Label(
+            frame,
+            text=subtitle,
+            bg=UI["panel"],
+            fg=UI["muted"],
+            font=("Segoe UI", 8),
+        ).pack(anchor="w", pady=(1, 0))
+
     def _status_row(
+        self,
         parent: tk.Widget,
         name: str,
         variable: tk.StringVar,
         wraplength: int = 220,
     ) -> None:
-        row = tk.Frame(parent)
-        row.pack(fill="x", padx=20, pady=5)
+        card = tk.Frame(
+            parent,
+            bg=UI["card"],
+            highlightbackground=UI["border"],
+            highlightthickness=1,
+        )
+        card.pack(fill="x", pady=5)
         tk.Label(
-            row,
-            text=f"{name}:",
-            width=12,
-            anchor="w",
-            font=("Arial", 11, "bold"),
-        ).pack(side="left", anchor="n")
+            card,
+            text=name.upper(),
+            bg=UI["card"],
+            fg=UI["muted"],
+            font=("Segoe UI", 8, "bold"),
+        ).pack(anchor="w", padx=14, pady=(10, 2))
         tk.Label(
-            row,
+            card,
             textvariable=variable,
+            bg=UI["card"],
+            fg=UI["text"],
             anchor="w",
             justify="left",
             wraplength=wraplength,
-            font=("Arial", 11),
-        ).pack(side="left", fill="x", expand=True)
+            font=FONT["value_big"],
+        ).pack(fill="x", padx=14, pady=(0, 10))
 
     def _bind_manual_controls(self) -> None:
         key_map = {
@@ -539,21 +702,56 @@ class GestureBotApp:
         self.root.bind("<KeyPress>", on_key)
         self.root.focus_force()
 
-    def _on_mode_change(self) -> None:
+    def _refresh_mode_badge(self) -> None:
         if self.simulation_var.get():
-            self.connection_var.set("Modo simulación: no se usa la red")
+            self.mode_badge.config(
+                text="SIMULATION MODE",
+                bg="#133127",
+                fg="#8ef0b0",
+            )
         else:
-            self.connection_var.set(
-                f"ESP32 activada: http://{self.ip_var.get().strip()}/"
+            self.mode_badge.config(
+                text="LIVE ESP32 MODE",
+                bg="#14243f",
+                fg="#9cc5ff",
             )
 
-        # Al cambiar de modo, vuelve a aplicar el comando actual.
+    def _apply_ip(self, _event: tk.Event | None = None) -> None:
+        self.last_dispatched_command = None
+        if self.simulation_var.get():
+            self.connection_var.set(
+                f"ESP32 IP saved: {self.ip_var.get().strip()} (simulation mode active)"
+            )
+        else:
+            self.connection_var.set(
+                f"ESP32 active: http://{self.ip_var.get().strip()}/"
+            )
+            self.dispatch_command(self.stable_command, force=True)
+
+    def _test_connection(self) -> None:
+        if self.simulation_var.get():
+            self.connection_var.set(
+                "Simulation mode is active. Disable it to test the real ESP32."
+            )
+            return
+        self.last_dispatched_command = None
+        self.dispatch_command("STOP", force=True)
+
+    def _on_mode_change(self) -> None:
+        self._refresh_mode_badge()
+        if self.simulation_var.get():
+            self.connection_var.set("Simulation mode active: network requests disabled")
+        else:
+            self.connection_var.set(
+                f"ESP32 active: http://{self.ip_var.get().strip()}/"
+            )
+
         self.last_dispatched_command = None
         self.dispatch_command(self.stable_command, force=True)
 
     def update_video(self, frame: np.ndarray) -> None:
-        available_width = max(self.video_label.winfo_width(), 640)
-        available_height = max(self.video_label.winfo_height(), 480)
+        available_width = max(self.video_label.winfo_width(), 760)
+        available_height = max(self.video_label.winfo_height(), 560)
 
         height, width = frame.shape[:2]
         scale = min(available_width / width, available_height / height)
@@ -588,16 +786,16 @@ class GestureBotApp:
 
         if self.simulation_var.get():
             self.connection_var.set(
-                f"Modo simulación — comando generado: /{endpoint}"
+                f"Simulation mode — generated command: /{endpoint}"
             )
             return
 
         ip = self.ip_var.get().strip()
         if not ip:
-            self.connection_var.set("No se ha indicado la IP de la ESP32")
+            self.connection_var.set("No ESP32 IP has been provided")
             return
 
-        self.connection_var.set(f"Enviando: http://{ip}/{endpoint}")
+        self.connection_var.set(f"Sending: http://{ip}/{endpoint}")
 
         def request() -> None:
             try:
@@ -609,7 +807,7 @@ class GestureBotApp:
                 self.root.after(
                     0,
                     lambda: self.connection_var.set(
-                        f"ESP32 confirmó el comando: {endpoint}"
+                        f"ESP32 confirmed command: {endpoint}"
                     ),
                 )
             except (URLError, TimeoutError, OSError) as error:
@@ -617,8 +815,7 @@ class GestureBotApp:
                 self.root.after(
                     0,
                     lambda name=error_name: self.connection_var.set(
-                        f"ESP32 no disponible ({name}). "
-                        f"Comando simulado: {endpoint}"
+                        f"ESP32 unavailable ({name}). Fallback info: {endpoint}"
                     ),
                 )
 
@@ -632,7 +829,7 @@ class GestureBotApp:
 
         ok, frame = self.capture.read()
         if not ok or frame is None:
-            self.connection_var.set("No se pudo leer la cámara")
+            self.connection_var.set("Could not read from the camera")
             self.root.after(100, self.process_frame)
             return
 
@@ -720,7 +917,7 @@ class GestureBotApp:
                 self.candidate_label = "STOP"
                 self.candidate_count = 0
                 self.probability_history.clear()
-                self.connection_var.set(f"Frame descartado: {error}")
+                self.connection_var.set(f"Discarded frame: {error}")
         else:
             self.probability_history.clear()
             self.candidate_label = "STOP"
@@ -728,7 +925,7 @@ class GestureBotApp:
             self.stable_command = "STOP"
 
         # Actualización de interfaz.
-        self.hand_var.set(handedness if hand_detected else "No detectada")
+        self.hand_var.set(handedness if hand_detected else "No hand detected")
         self.prediction_var.set(raw_label)
         self.confidence_var.set(
             f"{confidence * 100:.1f} %" if hand_detected else "--"
@@ -753,27 +950,41 @@ class GestureBotApp:
         # la lógica que preparó tu compañero.
         self.dispatch_command(self.stable_command)
 
-        # Información directamente sobre la imagen.
-        cv2.rectangle(frame, (0, 0), (500, 150), (18, 18, 18), -1)
+        # Información elegante sobre la imagen.
+        panel = frame.copy()
+        cv2.rectangle(panel, (16, 16), (420, 158), (11, 18, 32), -1)
+        cv2.rectangle(panel, (16, 16), (420, 158), (43, 58, 88), 1)
+        cv2.addWeighted(panel, 0.92, frame, 0.08, 0, frame)
+        cv2.rectangle(frame, (16, 16), (420, 52), (34, 197, 94), -1)
+        cv2.putText(
+            frame,
+            "LIVE PREDICTION",
+            (30, 40),
+            cv2.FONT_HERSHEY_SIMPLEX,
+            0.62,
+            (7, 18, 31),
+            2,
+            cv2.LINE_AA,
+        )
         overlay_lines = [
-            f"Prediccion: {raw_label}",
-            f"Confianza: {confidence * 100:.1f} %",
+            f"Gesture: {raw_label}",
+            f"Confidence: {confidence * 100:.1f} %",
             (
-                "Estabilidad: "
+                "Stability: "
                 f"{min(self.candidate_count, self.args.confirm_frames)}/"
                 f"{self.args.confirm_frames}"
             ),
-            f"Comando: {self.stable_command}",
+            f"Command: {self.stable_command}",
         ]
-        for index, text in enumerate(overlay_lines):
+        for index, text_line in enumerate(overlay_lines):
             cv2.putText(
                 frame,
-                text,
-                (15, 30 + index * 34),
+                text_line,
+                (30, 78 + index * 20),
                 cv2.FONT_HERSHEY_SIMPLEX,
-                0.7,
-                (255, 255, 255),
-                2,
+                0.58,
+                (229, 238, 251),
+                1,
                 cv2.LINE_AA,
             )
 
